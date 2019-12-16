@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import QuizBar from './components/QuizBar';
+import Flashcard from './components/Flashcard';
 
 class App extends React.Component {
   constructor() {
@@ -19,8 +20,11 @@ class App extends React.Component {
   render() {
     console.log(this.state.cardStyle);
     return (
-      <div className="App">
-        <QuizBar userChoice={this.userChoice} />
+      <div className="App align-items-center d-flex">
+        <div className="container">
+          <QuizBar userChoice={this.userChoice} />
+          <Flashcard />
+        </div>
       </div>
     );
   }
