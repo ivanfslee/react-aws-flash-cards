@@ -1,14 +1,16 @@
 import React from 'react';
 
-function RegularCard() {
+function RegularCard(props) {
+    console.log(props.questionData);
+    const question = props.questionData;
     return (
         <div>
             <div className="card-back">
-                AWS Service
+                {question.service}
             </div>
             <div className="card-front">
-                <div>Description</div>
-                <div>Category</div>            
+                <div>{question.desc}</div>
+                <div>{question.cat}</div>            
             </div>
         </div>
     );
