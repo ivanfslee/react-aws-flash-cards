@@ -3,6 +3,11 @@ import RandomWeighted from './RandomWeighted';
 import Multicard from './Multicard';
 import RegularCard from './RegularCard';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faSpinner); //add spinner icon to the library
 
 class Flashcard extends React.Component {
     constructor() {
@@ -11,11 +16,12 @@ class Flashcard extends React.Component {
         this.state = {
             flipClass: '',
             questionData: '',
+            ready: false,
         };
     }
 
     componentDidMount() {
-        this.newCard();
+        
     }
 
     flip = e => {
@@ -38,12 +44,21 @@ class Flashcard extends React.Component {
         axios.get(path).then(response => {
             // console.log(response.data);
             this.setState({
-                questionData: response.data
+                questionData: response.data,
+                ready: true,
             })
         })
     }
 
     render() {
+        if (!this.state.ready) {
+            this.newCard();
+            return (
+                <div className="spinner-wrapper">
+                    <FontAwesomeIcon icon="spinner" size="6x" spin />
+                </div>
+            );
+        }
         return (
             <div>
                 <div className="row align-items-center card-holder">
